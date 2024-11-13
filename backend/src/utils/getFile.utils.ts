@@ -15,7 +15,6 @@ export const getFileFromGitHub = async (repoUrl: string, sha: string, token: str
                 Accept: 'application/vnd.github.v3.raw', // to get raw file content
             },
         });
-        console.log('File content:', response.data);
         return response.data;
     } catch (error) {
         console.error('Error fetching file:', error);

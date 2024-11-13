@@ -4,7 +4,8 @@
     "paths": {
       "~/routes": ["./routes"],
       "~/controllers": ["./controllers"],
-      "~/utils": ["./utils"]
+      "~/utils": ["./utils"],
+      "~/middlewares": ["./middlewares"]
     },
     "target": "ESNext",
     "module": "commonjs",
