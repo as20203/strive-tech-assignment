@@ -3,8 +3,7 @@ const axios = require('axios');
 export const getFileFromGitHub = async (repoUrl: string, sha: string, token: string) => {
     try {
         // Extract the repo owner and name from the URL
-        const [, , , owner, repo] = repoUrl.split('/');
-        console.log({ owner, repo });
+        const [, , , owner, repo] = repoUrl?.split('/');
         // GitHub API URL to get a file by SHA
         const url = `https://api.github.com/repos/${owner}/${repo}/git/blobs/${sha}`;
 

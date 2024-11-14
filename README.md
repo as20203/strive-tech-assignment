@@ -16,3 +16,7 @@ Improvements:
 
 1. Setting up login/signup (Make a flow diagram for this.)
 2. Saving history of the chat using langchain persistance layer. (make a flow diagram for this.)
+
+API Endpoints
+/code-quality
+(create a code quality snippet for a result)
