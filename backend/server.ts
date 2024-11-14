@@ -7,7 +7,7 @@ import cors from 'cors'
 import { register } from 'tsconfig-paths';
 import { compilerOptions } from './tsconfig.json';
 
-const baseUrl = join(__dirname, '');
+const baseUrl = join(__dirname, 'src');
 
 register({
     baseUrl,
@@ -16,6 +16,7 @@ register({
 
 const app = express();
 const port = process.env.PORT || 3000;
+
 app.use(cors({
     origin: ['http://localhost:3000']
 }))
