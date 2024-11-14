@@ -1,11 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import { Button } from "@/app/components/ui/button"
-import { Input } from "@/app/components/ui/input"
-import { Label } from "@/app/components/ui/label"
+import {
+    Button,
+    Input,
+    Label,
+    Alert,
+    AlertDescription,
+    AlertTitle
+} from "@/app/components/ui"
 import { Loader2 } from 'lucide-react'
-import { Alert, AlertDescription, AlertTitle } from "@/app/components/ui/alert"
 import { generateCodeQuality } from '../services'
 
 export default function GitHubRepoForm() {
@@ -23,10 +27,10 @@ export default function GitHubRepoForm() {
         try {
 
             const codeQuality = await generateCodeQuality(sha, repoUrl)
-            // Simulating API call
-
+            console.log({ codeQuality })
             setApiResponse(codeQuality)
         } catch (err) {
+            console.log({ err })
             setError('An error occurred while fetching the data. Please try again.')
         } finally {
             setIsLoading(false)
