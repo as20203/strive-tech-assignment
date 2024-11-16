@@ -10,6 +10,11 @@ export const generateCodeQuality = async (sha: string, repoUrl: string, type: 'f
         console.log({ codeQuality })
         return codeQuality.data.quality
     } catch (error) {
-        return []
+        if (axios.isAxiosError(error) && error.response) {
+            if (error.response.status === 400) {
+                throw Error(error?.response?.data?.message)
+            }
+        }
+        throw Error('invalid error')
     }
 }   

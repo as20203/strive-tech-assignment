@@ -84,3 +84,9 @@ We will use `mocha` and `chai` freamework for this.
 2. Check rendering of form is correct.
 
 We will use `jest` framework for this.
+
+## Validation
+
+I've setup validations for the commit and file based endpoints to check if the url and the commits are valid.
+This is to avoid passing data to LLM in case we have invalid data and save api calls.
+Validations can be found in the `middleware` folder inside the backend code.

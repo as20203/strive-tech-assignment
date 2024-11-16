@@ -35,7 +35,7 @@ export default function GitHubRepoForm() {
             setApiResponse(codeQuality)
         } catch (err) {
             console.log({ err })
-            setError('An error occurred while fetching the data. Please try again.')
+            setError(err?.toString() || 'An error occurred while fetching the data. Please try again.')
         } finally {
             setIsLoading(false)
         }
@@ -43,8 +43,8 @@ export default function GitHubRepoForm() {
 
     const handleBack = () => {
         setApiResponse(null)
-        // setRepoUrl('')
-        // setSha('')
+        setRepoUrl('')
+        setSha('')
     }
 
     if (apiResponse) {
