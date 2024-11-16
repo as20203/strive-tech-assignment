@@ -1,21 +1,28 @@
 import { Request, Response } from 'express';
-import { getFileFromGitHub, evaluateCodeQuality } from '~/utils';
-// const repoUrl = 'https://github.com/as20203/online-market-ts';
-// const sha = 'd76043dd80d1eaf92b749f24fdf7ee95004e48ef';
-interface Error {
-    message: string;
-}
+import { getFileFromGitHub, evaluateCodeQuality, getCommitReport } from '~/utils';
 
 export const createCodeQualtity = async (request: Request, response: Response) => {
     try {
-        const { repoUrl, sha } = request.body
+        const { repoUrl, sha, type } = request.body
         console.log(request.body)
-        const token = process.env.GITHUB_ACCESS_TOKEN || '';
-        const content = await getFileFromGitHub(repoUrl, sha, token);
-        const quality = await evaluateCodeQuality(content)
-        response.status(200).json({
-            quality
-        })
+
+        switch (type) {
+            case 'file':
+                const content = await getFileFromGitHub(repoUrl, sha);
+                const quality = await evaluateCodeQuality(content)
+                return response.status(200).json({
+                    quality
+                })
+            case 'commit':
+                const report = await getCommitReport(repoUrl, sha)
+                return response.status(200).json({
+                    quality: report
+                })
+            default:
+                return response.status(422).json({
+                    message: 'Invalid type provided'
+                })
+        }
 
     } catch (error) {
         if (error instanceof Error) {

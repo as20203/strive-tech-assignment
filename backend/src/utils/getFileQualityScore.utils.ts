@@ -3,7 +3,7 @@ import { ChatOpenAI } from "@langchain/openai";
 import { StringOutputParser } from "@langchain/core/output_parsers";
 const model = new ChatOpenAI({
     model: "gpt-4",
-    apiKey: process.env.OPENAI_API_KEY
+    apiKey: process.env.OPENAI_API_KEY,
 });
 
 // Function to generate code quality evaluation using LCEL
@@ -16,7 +16,8 @@ export const evaluateCodeQuality = async (code: string) => {
       4. Efficiency
       5. Best practices (e.g., modern  practices, variable declarations, etc.)
       
-      Provide a score between 1 and 10 for the overall code quality and give suggestions for improvements in each of the above areas.
+      Provide a score between 1 and 10 for the overall code quality and give suggestions for improvements in each of the above areas. 
+      Write overall score on top of the result.
     `
     const promptTemplate = ChatPromptTemplate.fromMessages([
         ["system", systemContent],

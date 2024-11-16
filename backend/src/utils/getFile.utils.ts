@@ -1,7 +1,9 @@
-const axios = require('axios');
+import axios from 'axios'
 
-export const getFileFromGitHub = async (repoUrl: string, sha: string, token: string) => {
+export const getFileFromGitHub = async (repoUrl: string, sha: string) => {
     try {
+        const token = process.env.GITHUB_ACCESS_TOKEN || '';
+
         // Extract the repo owner and name from the URL
         const [, , , owner, repo] = repoUrl?.split('/');
         // GitHub API URL to get a file by SHA

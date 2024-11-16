@@ -1,5 +1,4 @@
 'use client'
-
 import { useState } from 'react'
 import {
     Button,
@@ -7,7 +6,12 @@ import {
     Label,
     Alert,
     AlertDescription,
-    AlertTitle
+    AlertTitle,
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
 } from "@/app/components/ui"
 import { Loader2 } from 'lucide-react'
 import { generateCodeQuality } from '../services'
@@ -15,6 +19,7 @@ import { generateCodeQuality } from '../services'
 export default function GitHubRepoForm() {
     const [repoUrl, setRepoUrl] = useState('')
     const [sha, setSha] = useState('')
+    const [type, setType] = useState<'file' | 'commit'>('file')
     const [isLoading, setIsLoading] = useState(false)
     const [apiResponse, setApiResponse] = useState<string | null>(null)
     const [error, setError] = useState<string | null>(null)
@@ -25,8 +30,7 @@ export default function GitHubRepoForm() {
         setError(null)
 
         try {
-
-            const codeQuality = await generateCodeQuality(sha, repoUrl)
+            const codeQuality = await generateCodeQuality(sha, repoUrl, type)
             console.log({ codeQuality })
             setApiResponse(codeQuality)
         } catch (err) {
@@ -39,15 +43,15 @@ export default function GitHubRepoForm() {
 
     const handleBack = () => {
         setApiResponse(null)
-        setRepoUrl('')
-        setSha('')
+        // setRepoUrl('')
+        // setSha('')
     }
 
     if (apiResponse) {
         return (
             <div className="space-y-4 w-full max-w-md">
                 <h2 className="text-2xl font-bold mb-4">Code Review</h2>
-                <div className="prose max-w-none">
+                <div className="prose max-w-none h-96 overflow-y-auto border border-gray-200 rounded-md p-4">
                     <pre className="whitespace-pre-wrap">{apiResponse}</pre>
                 </div>
                 <Button onClick={handleBack} className="w-full">Back to Form</Button>
@@ -84,6 +88,18 @@ export default function GitHubRepoForm() {
                     onChange={(e) => setSha(e.target.value)}
                     required
                 />
+            </div>
+            <div className="space-y-2">
+                <Label htmlFor="type">Type</Label>
+                <Select value={type} onValueChange={(value: 'file' | 'commit') => setType(value)}>
+                    <SelectTrigger>
+                        <SelectValue placeholder="Select type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="file">File</SelectItem>
+                        <SelectItem value="commit">Commit</SelectItem>
+                    </SelectContent>
+                </Select>
             </div>
             <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? (
