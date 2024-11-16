@@ -31,6 +31,7 @@ export const fetchCommitFiles = async (repoUrl: string, commitHash: string): Pro
                 Authorization: `Bearer ${token}`,
             }
         });
+
         // Get file changes from the commit
         const files: FileData[] = response.data.files;
         return files;
@@ -40,7 +41,7 @@ export const fetchCommitFiles = async (repoUrl: string, commitHash: string): Pro
     }
 }
 
-const splitTextIntoChunks = async (text: string) => {
+export const splitTextIntoChunks = async (text: string) => {
     const textSplitter = new RecursiveCharacterTextSplitter({
         chunkSize: 6000, // Number of characters per chunk
         chunkOverlap: 200, // Number of characters that overlap between chunks
@@ -83,16 +84,22 @@ const getFileEvaluations = async (results: Results[]) => {
 
 }
 export const getCommitReport = async (repoUrl: string, commitHash: string) => {
+
+    // Fetching files in commit
     const files = await fetchCommitFiles(repoUrl, commitHash)
     if (files.length > 0) {
+
+        // Getting files content
         const filePromises = files.map(async (file) => {
             const { filename, sha } = file;
             console.log(`Fetching file: ${filename}`);
+
             const codeContent = await getFileFromGitHub(repoUrl, sha);
             return { filename, codeContent };
         });
         const results = await Promise.all(filePromises);
 
+        // Getting file code quality evaluations from llm.
         const fileEvaluations = await getFileEvaluations(results)
 
         // Filter out null results and only include successfully processed files
@@ -105,6 +112,7 @@ export const getCommitReport = async (repoUrl: string, commitHash: string) => {
 
         let report = `Code Quality Report for commit ${commitHash}:\n\n`;
 
+        // Return successful evaluations
         successfulEvaluations.forEach(({ filename, evaluation }) => {
             report += `File: ${filename}\n`;
             report += `Evaluation: \n${evaluation}\n\n`;

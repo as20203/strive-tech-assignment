@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getFileFromGitHub, evaluateCodeQuality, getCommitReport } from '~/utils';
+import { getCommitReport, getFileReport } from '~/utils';
 
 export const createCodeQualtity = async (request: Request, response: Response) => {
     try {
@@ -8,8 +8,7 @@ export const createCodeQualtity = async (request: Request, response: Response) =
 
         switch (type) {
             case 'file':
-                const content = await getFileFromGitHub(repoUrl, sha);
-                const quality = await evaluateCodeQuality(content)
+                const quality = await getFileReport(repoUrl, sha)
                 return response.status(200).json({
                     quality
                 })
@@ -27,14 +26,12 @@ export const createCodeQualtity = async (request: Request, response: Response) =
     } catch (error) {
         if (error instanceof Error) {
             const { message } = error;
-            console.log({ error: error?.message })
-            response.status(500).json({
+            return response.status(500).json({
                 error: message
             })
-        } else {
-            response.status(500).json({
-                error: 'An unknown error occured'
-            })
         }
+        return response.status(500).json({
+            error: 'An unknown error occured'
+        })
     }
 }
