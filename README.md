@@ -68,7 +68,7 @@ I would love to discuss this approach.
 
 1. Make a `.env` file in the backend folder root and copy contents from `env.backend.txt` provided by me.
 
-2. Make a `.env.local` file in the frontend folder root and copy contents from `env.frontend.txt` provided by me.
+2. Make a `.env.local` file in the frontend folder root and copy contents from `env.frontend.txt` provided by me. In this case change `NEXT_PUBLIC_BACKEND_URL = http://localhost` in the file. since we are using nginx as reverse proxy.
 
 3. Install docker from https://docs.docker.com/engine/install/ubuntu/
 4. Navaigate to the root of the project having `docker-compose.yaml` file and run
