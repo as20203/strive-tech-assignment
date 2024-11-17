@@ -64,7 +64,26 @@ I would love to discuss this approach.
 
 # How to run locally:
 
-## a. Using node and npm. (Recommended)
+## a. Using docker (Recommended)
+
+1. Make a `.env` file in the backend folder root and copy contents from `env.backend.txt` provided by me.
+
+2. Make a `.env.local` file in the frontend folder root and copy contents from `env.frontend.txt` provided by me.
+
+3. Install docker from https://docs.docker.com/engine/install/ubuntu/
+4. Navaigate to the root of the project having `docker-compose.yaml` file and run
+
+```
+docker-compose up --build
+```
+
+The application will run on port 80 of http://localhost. You can change port in docker-compose.yaml
+
+# Important Note:
+
+Added some gateway timeout increase to process request in case of a commit based quality.
+
+## b. Using node and npm.
 
 # Install node and npm (Node v20)
 
@@ -79,47 +98,26 @@ jawad@jawad-HP-EliteBook-840-G5:~/Desktop/strive-assignment$ npm -v
 
 # Backend folder
 
-1. Make a `.env` file in the backend folder root and copy contents from `env.backend.txt` provided by me.
-2. go to backend folder and run following commands
+1. Make a `.env` file in the backend folder root and copy contents from `env.backend.txt` provided by me. Change the ports if in use.
+2. go to backend folder using `cd backend` and run following commands in one terminal
 
 ```
-npm install
+npm run build
 npm start
 ```
 
 ## Frontend Folder
 
-1. Make a `.env.local` file in the frontend folder root and copy contents from `env.frontend.txt` provided by me.
-2. Go to frontent folder and run the following commands
+1. Make a `.env.local` file in the frontend folder root and copy contents from `env.frontend.txt` provided by me. Change the ports if in use.
+2. Go to frontent folder using `cd frontend` and run the following commands in a separate terminal
 
 ```
 npm install
 npm run dev
 ```
 
-This will open the application on http://localhost:3000. Navigate there and try out the app.
+This will open the application on http://localhost:3000 Do a hard refresh using ctrl+shift+R to clear cache (sometimes it may cause file dropdown to give issues). Navigate there and try out the app.
 I'll provide the env files for backend and frontend.
-
-## b. Using docker
-
-1. Setup
-
-1. Make a `.env` file in the backend folder root and copy contents from `env.backend.txt` provided by me.
-
-1. Make a `.env.local` file in the frontend folder root and copy contents from `env.frontend.txt` provided by me.
-
-1. Install docker from https://docs.docker.com/engine/install/ubuntu/
-1. Navaigate to the root of the project having `docker-compose.yaml` file and run
-
-```
-docker-compose up --build
-```
-
-The application will run on port 80 of http://localhost. You can change port in docker-compose.yaml
-
-# Important Note:
-
-Added some gateway timeout increase to process request in case of a commit
 
 # Deployment:
 
