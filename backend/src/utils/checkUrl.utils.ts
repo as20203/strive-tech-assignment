@@ -27,7 +27,6 @@ export const checkGitHubRepo = async (url: string): Promise<boolean> => {
 
         // Construct the GitHub API URL
         const apiUrl = `https://api.github.com/repos/${owner}/${repo}`;
-        console.log({ apiUrl })
         // Make a GET request to the GitHub API
         const response = await axios.get(apiUrl, {
             headers: {

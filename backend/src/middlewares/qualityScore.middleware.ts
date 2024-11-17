@@ -5,7 +5,6 @@ export const validateCreateCodeQuality = async (request: Request, response: Resp
     const { repoUrl, sha, type } = request.body
     const shaType = ['file', 'commit']
     const validateUrl = await checkGitHubRepo(repoUrl)
-    console.log({ validateUrl })
     if (!validateUrl) {
         return response.status(400).json({
             message: 'invalid github repo url'

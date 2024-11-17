@@ -4,7 +4,6 @@ import { getCommitReport, getFileReport } from '~/utils';
 export const createCodeQualtity = async (request: Request, response: Response) => {
     try {
         const { repoUrl, sha, type } = request.body
-        console.log(request.body)
 
         switch (type) {
             case 'file':

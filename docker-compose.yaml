@@ -27,9 +27,5 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: backend
-    environment:
-      - PORT=${PORT}
-      - GITHUB_ACCESS_TOKEN=${GITHUB_ACCESS_TOKEN}
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
     expose:
       - "5000"

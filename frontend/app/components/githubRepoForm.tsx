@@ -31,7 +31,6 @@ export default function GitHubRepoForm() {
 
         try {
             const codeQuality = await generateCodeQuality(sha, repoUrl, type)
-            console.log({ codeQuality })
             setApiResponse(codeQuality)
         } catch (err) {
             console.log({ err })
