@@ -79,7 +79,7 @@ jawad@jawad-HP-EliteBook-840-G5:~/Desktop/strive-assignment$ npm -v
 
 # Backend folder
 
-1. Make a `.env` file in the backend folder root and copy contents from `.env.backend` provided by me.
+1. Make a `.env` file in the backend folder root and copy contents from `env.backend.txt` provided by me.
 2. go to backend folder and run following commands
 
 ```
@@ -89,7 +89,7 @@ npm start
 
 ## Frontend Folder
 
-1. Make a `.env.local` file in the backend folder root and copy contents from .env.backend provided by me.
+1. Make a `.env.local` file in the frontend folder root and copy contents from `env.frontend.txt` provided by me.
 2. Go to frontent folder and run the following commands
 
 ```
@@ -104,9 +104,9 @@ I'll provide the env files for backend and frontend.
 
 1. Setup
 
-1. Make a `.env.local` file in the backend folder root and copy contents from .env.backend provided by me.
+1. Make a `.env` file in the backend folder root and copy contents from `env.backend.txt` provided by me.
 
-1. Make a `.env.local` file in the backend folder root and copy contents from .env.backend provided by me.
+1. Make a `.env.local` file in the frontend folder root and copy contents from `env.frontend.txt` provided by me.
 
 1. Install docker from https://docs.docker.com/engine/install/ubuntu/
 1. Navaigate to the root of the project having `docker-compose.yaml` file and run
@@ -115,7 +115,7 @@ I'll provide the env files for backend and frontend.
 docker-compose up --build
 ```
 
-The application will run on port 80 of http://localhost
+The application will run on port 80 of http://localhost. You can change port in docker-compose.yaml
 
 # Important Note:
 
